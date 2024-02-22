@@ -3,6 +3,7 @@ A simple bot that identifies and searches for the latest cars added on Kavak and
 
 # Setup
 Execute `pip3 install -r requirements.txt`
+
 Create `config.json` at root level, copy/paste and update the following json
 ```json
 {
