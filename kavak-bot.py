@@ -230,11 +230,12 @@ def execute_job():
     filtered_cars = get_filtered_cars()
     log('Cars found: {}...'.format(len(filtered_cars)))
 
-    not_sent_filtered_cars = filter_not_sent_cars(filtered_cars, read_cars_sent())
+    cars_sent = read_cars_sent()
+    not_sent_filtered_cars = filter_not_sent_cars(filtered_cars, cars_sent)
     log('Recently added cars: {}...'.format(len(not_sent_filtered_cars)))
 
     if not_sent_filtered_cars:
-        send_cars_email(not_sent_filtered_cars, filtered_cars)
+        send_cars_email(not_sent_filtered_cars, filtered_cars if cars_sent else [])
         log("Cars email sent...")
 
         save_cars_sent(filtered_cars)
