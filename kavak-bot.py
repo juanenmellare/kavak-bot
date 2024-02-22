@@ -123,7 +123,8 @@ def save_cars_sent(cars):
 def read_cars_sent():
     try:
         file = open(cars_sent_txt_path, 'r')
-        return file.read().split(',')
+        file_content = file.read()
+        return file_content.split(',') if file_content else []
     except FileNotFoundError as _:
         return []
 
