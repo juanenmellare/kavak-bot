@@ -2,11 +2,13 @@
 A simple bot that identifies and searches for the latest cars added on Kavak and notify via email.
 <img width="784" alt="Screenshot 2024-02-22 at 02 38 10" src="https://github.com/juanenmellare/kavak-bot/assets/18221356/846198ba-f70e-487c-acad-958465d9d458">
 
+# Requirements
+Python 3.11 or higher (https://www.python.org/downloads/).
 
 # Setup
-Execute `pip3 install -r requirements.txt`
+Execute `pip3 install -r requirements.txt`.
 
-Create `config.json` at root level, copy/paste and update the following json
+Create `config.json` at root level, copy/paste and update the following JSON.
 ```json
 {
   "search_rate_per_minutes": 30, // Search and notify interval.
@@ -36,3 +38,6 @@ Create `config.json` at root level, copy/paste and update the following json
   "receiver": "x@x.com"          // The email that will receive the reports.
 }
 ```
+
+# Run
+Execute `python3 kavak-bot.py`.
