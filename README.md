@@ -1,6 +1,8 @@
 # Kavak Bot
 A simple bot that identifies and searches for the latest cars added on Kavak and notify via email.
 
+<img width="789" alt="Screenshot 2024-02-22 at 02 33 22" src="https://github.com/juanenmellare/kavak-bot/assets/18221356/3dff72d4-bec7-4df4-91db-008b1d4a3090">
+
 # Setup
 Execute `pip3 install -r requirements.txt`
 
