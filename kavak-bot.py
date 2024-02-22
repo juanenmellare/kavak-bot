@@ -1,5 +1,4 @@
 import json
-import signal
 import smtplib
 import time
 from datetime import datetime
@@ -16,15 +15,6 @@ base_url = 'www.kavak.com'
 https_base_url = 'https://' + base_url
 api_advanced_search = https_base_url + '/api/advanced-search-api/v2/advanced-search?loan_limit=true'
 cars_sent_txt_path = 'cars_sent.txt'
-
-
-def handler(signum, frame):
-    res = input('\n' + get_current_time_for_log() + 'Do you want to exit? y/n... ')
-    if res == 'y':
-        log('------------ STOPPED -----------')
-
-
-signal.signal(signal.SIGINT, handler)
 
 
 def get_current_time_for_log():
