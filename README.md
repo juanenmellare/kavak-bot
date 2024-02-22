@@ -6,7 +6,7 @@ Execute `pip3 install -r requirements.txt`
 Create `config.json` at root level, copy/paste and update the following json
 ```json
 {
-  "search_rate_per_minutes": 1, // Search and notify interval.
+  "search_rate_per_minutes": 30, // Search and notify interval.
   "country_acronym": "ar",      // Kavak country code. 
   "filters": {                  // Kavak filters, check them at the URL of the web page when filter are applied (should match and if you want to ignore them add an underscore at the begging of the key). 
     "order": "higher_price",
