@@ -7,8 +7,8 @@ Create `config.json` at root level, copy/paste and update the following json
 ```json
 {
   "search_rate_per_minutes": 30, // Search and notify interval.
-  "country_acronym": "ar",      // Kavak country code. 
-  "filters": {                  // Kavak filters, check them at the URL of the web page when filter are applied (should match and if you want to ignore them add an underscore at the begging of the key). 
+  "country_acronym": "ar",       // Kavak country code. 
+  "filters": {                   // Kavak filters, check them at the URL of the web page when filter are applied (should match and if you want to ignore them add an underscore at the begging of the key). 
     "order": "higher_price",
     "min_price": 0,
     "max_price": 18000000,
@@ -25,12 +25,12 @@ Create `config.json` at root level, copy/paste and update the following json
     "_maker": [],
     "_model": []
   },
-  "smtp": {                     // SMTP data to send emails.
+  "smtp": {                      // SMTP data to send emails.
     "host": "smtp.x.com",
     "port": 777,
     "user": "x@x.com",
     "password": "x"
   },
-  "receiver": "x@x.com"         // The email that will receive the reports.
+  "receiver": "x@x.com"          // The email that will receive the reports.
 }
 ```
