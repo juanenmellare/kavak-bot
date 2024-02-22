@@ -47,7 +47,7 @@ def build_session():
         'accept-language': 'es-419,es;q=0.9,en;q=0.8',
         'kavak-client-type': 'web',
         'kavak-country-acronym': country_acronym,
-        'referer': '{}/{}/usados'.format(https_base_url, country_acronym),
+        'referer': f'{https_base_url}/{country_acronym}/usados'
     }
     session.headers = headers
 
@@ -66,7 +66,7 @@ def build_query_parameters():
     for filter_key in filters:
         filter_value = filters[filter_key]
         filter_value_formatted = format_query_parameter(filter_value)
-        query_parameters = '{}&{}={}'.format(query_parameters, filter_key, filter_value_formatted)
+        query_parameters = f'{query_parameters}&{filter_key}={filter_value_formatted}'
 
     return query_parameters
 
@@ -229,11 +229,11 @@ def execute_job():
     log('Looking for cars...')
 
     filtered_cars = get_filtered_cars()
-    log('Cars found: {}...'.format(len(filtered_cars)))
+    log(f'Cars found: {len(filtered_cars)}...')
 
     cars_sent = read_cars_sent()
     not_sent_filtered_cars = filter_not_sent_cars(filtered_cars, cars_sent)
-    log('Recently added cars: {}...'.format(len(not_sent_filtered_cars)))
+    log(f'Recently added cars: {len(not_sent_filtered_cars)}...')
 
     if not_sent_filtered_cars:
         send_cars_email(not_sent_filtered_cars, filtered_cars if cars_sent else [])
