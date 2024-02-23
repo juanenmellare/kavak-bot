@@ -246,9 +246,13 @@ def execute_job():
 if __name__ == '__main__':
     log('------------ KAVAK BOT -----------')
     config = get_config()
-    schedule.every(config['search_rate_per_minutes']).minutes.do(execute_job)
 
     execute_job()
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+
+    search_rate_per_minutes = config['search_rate_per_minutes']
+    if search_rate_per_minutes:
+        schedule.every(search_rate_per_minutes).minutes.do(execute_job)
+
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
