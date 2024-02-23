@@ -13,7 +13,7 @@ Or
 
 # Setup
 
-Create a filed `config.json` at root level, copy/paste and update the following JSON.
+Create a file `config.json` at root level, copy/paste and update the following JSON.
 ```json
 {
   "search_rate_per_minutes": 30, // Search and notify interval. When value is 0 it will execute just once.
