@@ -66,14 +66,14 @@ def build_query_parameters():
     for filter_key in filters:
         filter_value = filters[filter_key]
         filter_value_formatted = format_query_parameter(filter_value)
-        query_parameters = f'{query_parameters}&{filter_key}={filter_value_formatted}'
+        if filter_key[0] != '_':
+            query_parameters = f'{query_parameters}&{filter_key}={filter_value_formatted}'
 
     return query_parameters
 
 
-def get_filtered_cars():
+def get_filtered_cars(query_parameters):
     session = build_session()
-    query_parameters = build_query_parameters()
     api_advanced_search_with_filters = api_advanced_search + query_parameters + '&page='
 
     page = 0
@@ -88,7 +88,10 @@ def get_filtered_cars():
         cars = cars + advanced_search_result_json['cars']
         page = page + 1
 
-    cars.sort(key=lambda car: int(car['price'].replace('$ ', '').replace('.', '')))
+    order = config['filters'].get('order')
+    if order:
+        has_to_reverse = True if order == 'higher_price' else False
+        cars.sort(reverse=has_to_reverse, key=lambda car: int(car['price'].replace('$ ', '').replace('.', '')))
 
     return cars
 
@@ -166,7 +169,8 @@ def build_cars_table(cars, table_name):
     """
 
 
-def send_cars_email(not_sent_cars, cars):
+def send_cars_email(not_sent_cars, cars, query_parameters):
+    usados_url_href = f'{https_base_url}/{config["country_acronym"]}/usados{query_parameters.replace("&", "?", 1)}'
     not_sent_cars_table = build_cars_table(not_sent_cars, 'Not seen/Recently added')
     cars_table = build_cars_table(cars, 'Already seen')
 
@@ -216,6 +220,7 @@ def send_cars_email(not_sent_cars, cars):
             </style>
       </head>
       <body>
+        <a href='""" + usados_url_href + """'>Kavak Usados - Search</a>
         """ + not_sent_cars_table + """<br/>
         """ + cars_table + """
       </body>
@@ -228,7 +233,8 @@ def send_cars_email(not_sent_cars, cars):
 def execute_job():
     log('Looking for cars...')
 
-    filtered_cars = get_filtered_cars()
+    query_parameters = build_query_parameters()
+    filtered_cars = get_filtered_cars(query_parameters)
     log(f'Cars found: {len(filtered_cars)}...')
 
     cars_sent = read_cars_sent()
@@ -236,7 +242,7 @@ def execute_job():
     log(f'Recently added cars: {len(not_sent_filtered_cars)}...')
 
     if not_sent_filtered_cars:
-        send_cars_email(not_sent_filtered_cars, filtered_cars if cars_sent else [])
+        send_cars_email(not_sent_filtered_cars, filtered_cars if cars_sent else [], query_parameters)
         log("Cars email sent...")
 
         save_cars_sent(filtered_cars)
