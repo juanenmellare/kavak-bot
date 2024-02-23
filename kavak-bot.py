@@ -239,7 +239,7 @@ def execute_job():
 
     cars_sent = read_cars_sent()
     not_sent_filtered_cars = filter_not_sent_cars(filtered_cars, cars_sent)
-    log(f'Recently added cars: {len(not_sent_filtered_cars)}...')
+    log(f'Not seen/Recently added cars: {len(not_sent_filtered_cars)}...')
 
     if not_sent_filtered_cars:
         send_cars_email(not_sent_filtered_cars, filtered_cars if cars_sent else [], query_parameters)
