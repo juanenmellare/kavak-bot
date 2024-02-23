@@ -167,11 +167,11 @@ def build_cars_table(cars, table_name):
 
 
 def send_cars_email(not_sent_cars, cars):
-    not_sent_cars_table = build_cars_table(not_sent_cars, 'Recently added')
+    not_sent_cars_table = build_cars_table(not_sent_cars, 'Not seen/Recently added')
     cars_table = build_cars_table(cars, 'Already seen')
 
     subject_car_q = 'car' if len(not_sent_cars) == 1 else 'cars'
-    subject = f'KAVAK BOT - {len(not_sent_cars)} {subject_car_q} recently added'
+    subject = f'KAVAK BOT - {len(not_sent_cars)} {subject_car_q} not seen/recently added'
     cars_content = """\
     <html>
       <head>
