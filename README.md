@@ -1,14 +1,19 @@
 # Kavak Bot
+
 A simple bot that identifies and searches for the latest cars added on Kavak and notify via email.
 <img width="896" alt="Screenshot 2024-02-23 at 13 15 26" src="https://github.com/juanenmellare/kavak-bot/assets/18221356/22587e91-a6dc-4e0d-82be-70fc51cd8116">
 
 # Requirements
-Python 3.11 or higher (https://www.python.org/downloads/).
+
+**Python 3.11 or higher** (https://www.python.org/downloads/).
+
+Or
+
+**Docker** (https://docs.docker.com/get-docker/).
 
 # Setup
-Execute `pip3 install -r requirements.txt`.
 
-Create `config.json` at root level, copy/paste and update the following JSON.
+Create a filed `config.json` at root level, copy/paste and update the following JSON.
 ```json
 {
   "search_rate_per_minutes": 30, // Search and notify interval. When value is 0 it will execute just once.
@@ -30,7 +35,7 @@ Create `config.json` at root level, copy/paste and update the following JSON.
     "_maker": [],
     "_model": []
   },
-  "smtp": {                      // SMTP data to send emails.
+  "smtp": {                      // Your SMTP data to send emails.
     "host": "smtp.x.com",
     "port": 777,
     "user": "x@x.com",
@@ -40,5 +45,12 @@ Create `config.json` at root level, copy/paste and update the following JSON.
 }
 ```
 
+**Python:** `pip3 install -r requirements.txt`.
+
+**Docker:**  `make build`.
+
 # Run
-Execute `python3 kavak-bot.py`.
+
+**Python:** `python3 kavak-bot.py`.
+
+**Docker:** `make run` (for Unix OS) / `make run-windows` (for Windows OS).
