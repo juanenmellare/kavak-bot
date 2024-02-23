@@ -13,7 +13,7 @@ Or
 
 # Setup
 
-Create a file `config.json` in the same folder of 'kavak-bot.py', copy/paste and update the following JSON.
+Create a file `config.json` in the same folder as 'kavak-bot.py', copy/paste and update the following JSON.
 ```json
 {
   "search_rate_per_minutes": 30, // Search and notify interval. When value is 0 it will execute just once.
