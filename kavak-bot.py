@@ -15,7 +15,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 base_url = 'www.kavak.com'
 https_base_url = 'https://' + base_url
-api_advanced_search = https_base_url + '/apaai/advanced-search-api/v2/advanced-search?loan_limit=true'
+api_advanced_search = https_base_url + '/api/advanced-search-api/v2/advanced-search?loan_limit=true'
 cars_sent_txt_path = 'cars_sent.txt'
 
 
@@ -222,7 +222,7 @@ def send_cars_email(not_sent_cars, cars, query_parameters):
             </style>
       </head>
       <body>
-        <a href='""" + usados_url_href + """'>Kavak Usados - Search</a>
+        <a href='""" + usados_url_href + """'>Kavak - Search Link</a>
         """ + not_sent_cars_table + """<br/>
         """ + cars_table + """
       </body>
