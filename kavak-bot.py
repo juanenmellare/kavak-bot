@@ -1,6 +1,8 @@
 import json
 import smtplib
+import sys
 import time
+import traceback
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -13,7 +15,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 base_url = 'www.kavak.com'
 https_base_url = 'https://' + base_url
-api_advanced_search = https_base_url + '/api/advanced-search-api/v2/advanced-search?loan_limit=true'
+api_advanced_search = https_base_url + '/apaai/advanced-search-api/v2/advanced-search?loan_limit=true'
 cars_sent_txt_path = 'cars_sent.txt'
 
 
@@ -231,22 +233,26 @@ def send_cars_email(not_sent_cars, cars, query_parameters):
 
 
 def execute_job():
-    log('Looking for cars...')
+    try:
+        log('Looking for cars...')
 
-    query_parameters = build_query_parameters()
-    filtered_cars = get_filtered_cars(query_parameters)
-    log(f'Cars found: {len(filtered_cars)}...')
+        query_parameters = build_query_parameters()
+        filtered_cars = get_filtered_cars(query_parameters)
+        log(f'Cars found: {len(filtered_cars)}...')
 
-    cars_sent = read_cars_sent()
-    not_sent_filtered_cars = filter_not_sent_cars(filtered_cars, cars_sent)
-    log(f'Not seen/Recently added cars: {len(not_sent_filtered_cars)}...')
+        cars_sent = read_cars_sent()
+        not_sent_filtered_cars = filter_not_sent_cars(filtered_cars, cars_sent)
+        log(f'Not seen/Recently added cars: {len(not_sent_filtered_cars)}...')
 
-    if not_sent_filtered_cars:
-        send_cars_email(not_sent_filtered_cars, filtered_cars if cars_sent else [], query_parameters)
-        log("Cars email sent...")
+        if not_sent_filtered_cars:
+            send_cars_email(not_sent_filtered_cars, filtered_cars if cars_sent else [], query_parameters)
+            log("Cars email sent...")
 
-        save_cars_sent(filtered_cars)
-        log("Cars found saved...")
+            save_cars_sent(filtered_cars)
+            log("Cars found saved...")
+    except Exception as e:
+        log(f'ERROR: {str(e)}')
+        traceback.print_exception(*sys.exc_info())
 
 
 if __name__ == '__main__':
