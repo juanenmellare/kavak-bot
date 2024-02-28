@@ -161,7 +161,7 @@ def build_cars_table(cars, table_name):
                         <th>Price</th>
                         <th>Year</th>
                         <th>Km</th>
-                        <th>Type</th>
+                        <th>Transmission</th>
                         <th>Color</th>
                     </tr>
                 </thead>
@@ -182,6 +182,10 @@ def send_cars_email(not_sent_cars, cars, query_parameters):
     <html>
       <head>
         <style>
+            a {
+                color: #1351ec;
+            }
+            
             .cars-table {
                 overflow: auto;
                 width: 100%;
@@ -202,14 +206,14 @@ def send_cars_email(not_sent_cars, cars, query_parameters):
             }
 
             .cars-table th {
-                border: 1px solid #dededf;
-                background-color: #2196f3;
+                border: 1px solid #e7e9ee;
+                background-color: #000000;
                 color: #ffffff !important;
                 padding: 5px;
             }
 
             .cars-table td {
-                border: 1px solid #dededf;
+                border: 1px solid #e7e9ee;
                 background-color: #ffffff;
                 color: #000000;
                 padding: 5px;
